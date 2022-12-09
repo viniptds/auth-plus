@@ -2,13 +2,12 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    return queryInterface.createTable('application', {
+  async up(queryInterface, Sequelize) {
+    return queryInterface.createTable('applications', {
       id: {
         allowNull: false,
         autoIncrement: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
         type: Sequelize.INTEGER
       },
       name: {
@@ -24,16 +23,21 @@ module.exports = {
         allowNull: false
       },
       active: {
-        type: Boolean,
+        type: Sequelize.DataTypes.BOOLEAN,
         allowNull: false
       },
-    
-      updatedAt: Sequelize.DataTypes.DATE,
-      createdAt: Sequelize.DataTypes.DATE
+      updatedAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      },
+      createdAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      }
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('application');
+  async down(queryInterface, Sequelize) {
+    return queryInterface.dropTable('applications');
   }
 };

@@ -3,48 +3,45 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.createTable('claimGranted', {
+    return queryInterface.createTable('rolesClaims', {
       id: {
         allowNull: false,
         autoIncrement: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      roleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {  
-          model: 'user',
+          model: 'roles',
           key: 'id'
         }
       },
-      applicationId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {    
-          model: 'application',
-          key: 'id'
-        }
-      },
-      roleClaimId: {
+      claimId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {  
-          model: 'roleClaim',
+          model: 'claims',
           key: 'id'
         }
       },
       active: {
-        type: Boolean,
+        type: Sequelize.DataTypes.BOOLEAN,
         allowNull: false
       },
-      updatedAt: Sequelize.DataTypes.DATE,
-      createdAt: Sequelize.DataTypes.DATE
+      updatedAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      },
+      createdAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('claimGranted');
+    return queryInterface.dropTable('rolesClaims');
   }
 };

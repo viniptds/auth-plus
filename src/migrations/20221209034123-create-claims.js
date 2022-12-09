@@ -3,21 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.createTable('role', {
+    return queryInterface.createTable('claims', {
       id: {
         allowNull: false,
         autoIncrement: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      applicationId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'application',
-          key: 'id'
-        }
       },
       name: {
         type: Sequelize.DataTypes.STRING,
@@ -26,15 +17,21 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
       },
       active: {
-        type: Boolean,
+        type: Sequelize.DataTypes.BOOLEAN,
         allowNull: false
       },
-      updatedAt: Sequelize.DataTypes.DATE,
-      createdAt: Sequelize.DataTypes.DATE
+      updatedAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      },
+      createdAt:
+      {
+        type: Sequelize.DataTypes.DATE,
+      }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('role');
+    return queryInterface.dropTable('claims');
   }
 };
