@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const RoleClaim = sequelize.define('rolesClaims', {
-    id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     roleId: DataTypes.INTEGER,
     claimId: DataTypes.INTEGER,
@@ -10,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: DataTypes.DATE
   }, {});
   RoleClaim.associate = function (models) {
-    RoleClaim.belongsTo(models.Role, { foreignKey: 'roleId' })
-    RoleClaim.belongsTo(models.Claim, { foreignKey: 'claimId' }),
-    RoleClaim.hasMany(models.claimGranted, { as: 'claimsGranted' })
+    RoleClaim.belongsTo(models.roles, { foreignKey: 'roleId' })
+    RoleClaim.belongsTo(models.claims, { foreignKey: 'claimId' }),
+    RoleClaim.hasMany(models.claimsGranted, { as: 'claimsGranted' })
 };
-  return Claim;
+  return RoleClaim;
 };
