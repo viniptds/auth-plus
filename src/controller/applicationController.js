@@ -1,4 +1,4 @@
-const models = require('../data/models/application')
+const models = require('../data/models')
 const applications = models.applications;
 const asyncWrapper = require('../middlewares/async');
 const { createCustomError } = require('../errors/custom-error')
